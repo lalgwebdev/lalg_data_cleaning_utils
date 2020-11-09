@@ -1,0 +1,4 @@
+name = LALG Data Cleaning Utilities
+description = Add-on features for the Delete Personal Data VBO View(s)
+package = Custom modules
+core = 7.x
