@@ -91,7 +91,7 @@ function lalg_data_cleaning_utils_delete_personal_data (&$entity, $context) {
 	}
 }
 
-//********************************************************************
+/* //********************************************************************
 // Adds Views Relationships 
 //********************************************************************
 
@@ -147,4 +147,4 @@ function lalg_data_cleaning_utils_views_query_alter(&$view, &$query) {
 
 }
 
-
+ */
