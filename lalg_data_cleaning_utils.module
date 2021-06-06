@@ -38,7 +38,7 @@ function lalg_data_cleaning_utils_delete_personal_data (&$entity, $context) {
 	$result = civicrm_api3('UFMatch', 'get', [
 	  'contact_id' => $cid,
 	]);
-	if ($result[count] == 1) {
+	if ($result['count'] == 1) {
 		$uid = $result['values'][0]['uf_id'];
 	}
 // dpm('Drupal User Id ' . $uid);
@@ -79,7 +79,7 @@ function lalg_data_cleaning_utils_delete_personal_data (&$entity, $context) {
 	]);
 	
 	// Delete associated Drupal User, Reassign content to Anonymous
-	if ($uid && $uid > 0) {
+	if (isset($uid) && $uid > 0) {
 		user_cancel(
 		  array(
 			'user_cancel_notify' => FALSE,
@@ -136,7 +136,7 @@ function lalg_data_cleaning_utils_views_query_alter(&$view, &$query) {
 	if (!$query->having) { return; }
 	
 	foreach($query->having[1]['conditions'] as $filter) { 
-		if ($filter['value'] && $filter['value'][':civicrm_event_start_date']) {
+		if (isset($filter['value']) && isset($filter['value'][':civicrm_event_start_date'])) {
 			$startDate = new DateTime($filter['value'][':civicrm_event_start_date']);
 			$fdate = date_format($startDate, 'Ymd');
 			$filter['value'][':civicrm_event_start_date'] = $fdate;
