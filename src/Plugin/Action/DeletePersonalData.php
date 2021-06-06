@@ -79,7 +79,7 @@ class DeletePersonalData extends ViewsBulkOperationsActionBase {
 		  ->execute();
 		
 		// Delete associated Drupal User, Reassign content to Anonymous
-		if ($uid && $uid > 0) {
+		if (isset($uid) && $uid > 0) {
 			user_cancel(
 			  array(
 				'user_cancel_notify' => FALSE,

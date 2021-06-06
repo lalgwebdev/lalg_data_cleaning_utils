@@ -25,7 +25,7 @@ function lalg_data_cleaning_utils_views_query_alter(&$view, &$query) {
 	if (!$query->having) { return; }
 	
 	foreach($query->having[1]['conditions'] as $filter) { 
-		if ($filter['value'] && $filter['value'][':civicrm_event_start_date']) {
+		if (isset($filter['value']) && isset($filter['value'][':civicrm_event_start_date'])) {
 			$startDate = new DateTime($filter['value'][':civicrm_event_start_date']);
 			$fdate = date_format($startDate, 'Ymd');
 			$filter['value'][':civicrm_event_start_date'] = $fdate;
