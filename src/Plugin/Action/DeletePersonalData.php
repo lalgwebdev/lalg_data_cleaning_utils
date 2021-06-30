@@ -51,7 +51,7 @@ class DeletePersonalData extends ViewsBulkOperationsActionBase {
 			drupal_set_message(t('You cannot delete yourself'), 'warning');
 			return;
 		}
-	// dpm('Drupal User Id ' . $uid);
+// dpm('Drupal User Id ' . $uid);
 
 		// Delete related Activities
 		$activityContacts = \Civi\Api4\ActivityContact::get()
@@ -80,14 +80,21 @@ class DeletePersonalData extends ViewsBulkOperationsActionBase {
 		
 		// Delete associated Drupal User, Reassign content to Anonymous
 		if (isset($uid) && $uid > 0) {
-			user_cancel(
-			  array(
-				'user_cancel_notify' => FALSE,
-				'user_cancel_method' => 'user_cancel_reassign',
-			  ),
-			  $uid,
-			  'user_cancel_reassign'
-			);
+
+			// Check if the UID exists
+			$db = \Drupal::database();
+			$query = $db->query("SELECT COUNT(*) AS num FROM {users} WHERE uid = :uid", [':uid' => $uid]);
+			$result = $query -> fetchAll();
+			if($result[0]->num > 0) {			
+				user_cancel(
+				  array(
+					'user_cancel_notify' => FALSE,
+					'user_cancel_method' => 'user_cancel_reassign',
+				  ),
+				  $uid,
+				  'user_cancel_reassign'
+				);
+			}
 		}
 		
 	}
