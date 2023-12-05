@@ -2,8 +2,8 @@ type: module
 name: 'LALG Data Cleaning'
 description: 'Add-on features for the Delete Personal Data VBO View(s)'
 package: 'Custom'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9 || ^10
 dependencies:
   - drupal:views_bulk_operations
 
-version: "3.0.1"
+version: "3.1.0"
